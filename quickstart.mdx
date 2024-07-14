@@ -1,86 +1,73 @@
 ---
 title: 'Quickstart'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'Connect Glimpse to your GitHub and Laravel Forge accounts'
 ---
+<img
+  className="block rounded-lg border border-gray-200 shadow-md"
+  src="/images/onboarding.png"
+  alt="Glimpse onboarding screen"
+/>
 
-## Setup your development
+## Connect your Laravel Forge account
 
-Learn how to update your docs locally and and deploy them to the public.
+Glimpse uses your Laravel Forge account to create isolated preview environments for your pull requests. To connect your Forge account, follow these steps:
 
-### Edit and preview
+### Create a Forge token
 
-<AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
-    [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    in your terminal.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `mint.json` is): ``` mintlify dev ```
-  </Accordion>
-</AccordionGroup>
+Head over to your [Forge API tokens](https://forge.laravel.com/user-profile/api) and create a new token. Give it a name and click the `Create` button. Copy the token and save it somewhere safe.
 
-### Deploy your changes
+### Add your Forge token to Glimpse
 
-<AccordionGroup>
+You can paste your Forge token into the input field for your Server Provider on the [onboarding](https://glimpse.sh/onboarding) page.
 
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
-</Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
-</Accordion>
+If you need to update your Forge token, you can visit your team settings page and navigate to the Integrations tab.
 
-</AccordionGroup>
+## Authorize GitHub
 
-## Update your docs
+You must authorize Glimpse to access your GitHub account. To do this, visit the [onboarding](https://glimpse.sh/onboarding) page and click the `Connect` button.
 
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
+If you need to update your GitHub token, you can do so from your [profile](https://glimpse.sh/user/profile) page in the Glimpse dashboard.
+
+## Install the Glimpse GitHub app
+
+The official Glimpse GitHub app manages access to your public and private repositories. To install the GitHub app, click the `Install` button on the [onboarding](https://glimpse.sh/onboarding) page.
+
+You can manage your GitHub app from your team settings page and navigating to the Integrations tab.
+
+## Connect your repository
+
+Once you have provided your Forge token and have GitHub authorized and installed, you can connect your repository to Glimpse. To do this, visit the [onboarding](https://glimpse.sh/onboarding) page and click the `Connect Repository` button.
+
+You can also connect a repository by clicking the `Connect repository` button in the navigation menu.
 
 <CardGroup>
 
-<Card title="Style Your Docs" icon="paintbrush" href="/settings/global">
-  Add flair to your docs with personalized branding.
+<Card title="Your first deployment" icon="rocket" href="/deployments">
+  Deploy your first preview environment.
 </Card>
 
 <Card
-  title="Add API Endpoints"
-  icon="square-code"
+  title="Configure your repository"
+  icon="gear"
   href="/api-playground/configuration"
 >
-  Implement your OpenAPI spec and enable API user interaction.
+  Customize your preview environments.
 </Card>
 
 <Card
-  title="Integrate Analytics"
-  icon="chart-mixed"
+  title="Notifications"
+  icon="bell"
   href="/analytics/supported-integrations"
 >
-  Draw insights from user interactions with your documentation.
+  Get notified when your preview environments are ready.
 </Card>
 
 <Card
-  title="Host on a Custom Domain"
-  icon="browser"
+  title="Collaborate"
+  icon="people-group"
   href="/settings/custom-domain/subdomain"
 >
-  Keep your docs on your own website's subdomain.
+  Manage preview environments and collaborate with your team.
 </Card>
 
 </CardGroup>

@@ -1,0 +1,61 @@
+---
+title: 'Deployments'
+description: 'Learn how to deploy your GitHub pull requests with Glimpse'
+---
+
+<Info>
+  **Prerequisite** You should have a Glimpse account configured to use GitHub and Laravel Forge, and connected your repository.
+</Info>
+
+Glimpse automatically deploys your pull requests to your Forge server. This allows you to preview your changes before merging them into your main branch. When a pull request is
+created or updated, you should see the following comment in the pull request:
+
+<Frame>
+  <img src="/images/deployment-started-comment.png" style={{ borderRadius: '0.5rem' }} />
+</Frame>
+When a pull request is opened, Glimpse handles the following:
+
+1. **Install Git Repository**: It installs the Git repository on the newly created site.
+
+2. **Update Deployment Script**: If the repository has a custom deployment script, Glimpse updates the deployment script on the site.
+
+3. **Update Environment Variables**: Glimpse updates the environment variables on the site with the values specified in the repository configuration.
+
+4. **Enable SSL**: If the repository uses HTTPS, Glimpse obtains a Let's Encrypt SSL certificate for the site.
+
+5. **Enable Security Rule**: If the repository has a security rule configured, Glimpse enables the security rule on the site.
+
+6. **Deploy Site**: Glimpse deploys the site on Forge.
+
+7. **Generate App Key**: It generates a new application key for the site.
+
+8. **Enable Quick Deploy**: Glimpse enables quick deploy for the site, allowing future deployments to be triggered automatically.
+
+9. **Enable Horizon and Pulse**: If the repository has Horizon or Pulse enabled, Glimpse sets up the necessary daemons on the site.
+
+<Tip>
+  Unlimited repositories available under the [Tea
+  Plan](https://glimpse.sh/pricing)
+</Tip>
+
+You should see the following if the deploy successfully went through:
+
+<Frame>
+  <img src="/images/deployment-complete-comment.png" style={{ borderRadius: '0.5rem' }} />
+</Frame>
+
+## Troubleshooting
+
+Here's how to solve some common problems when working with Glimpse.
+
+<AccordionGroup>
+  <Accordion title="Unable to connect repository">
+    This is likely an issue with your GitHub authorization or instllation. Please disconnect your Github account from your profile and reconnect.
+  </Accordion>
+  <Accordion title="Repository not found">
+    Make sure you have permission to access the repository and that you have installed the Glimpse GitHub app.
+  </Accordion>
+  <Accordion title="Getting an unknown error">
+    Please [contact support](mailto:support@glimpse.sh) and include the error message.
+  </Accordion>
+</AccordionGroup>
