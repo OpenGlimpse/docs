@@ -1,0 +1,162 @@
+---
+title: 'Repositories'
+description: 'Learn how to connect and configure your GitHub repositories'
+icon: 'book'
+---
+
+You can manage your repositories from the [repositories](https://glimpse.sh/repositories) page. Click the `Repositories` tab
+in the navigation menu to access your repositories.
+
+By default, Glimpse shows a list of all repositories you authorized it to access with your GitHub installation. You can connect a repository by clicking the `Connect` button for the repository you want to connect.
+
+## Connect
+To connect a repository, click the `Connect` button for the repository you want to connect.
+
+You will be able to configure the repository in the slide out that opens from the right. Glimpse will automatically set the repository and default branch for you.
+
+By default, you only need to select the Forge server you want to deploy your pull requests to.
+
+Glimpse offers additional [settings](#settings) to customize your preview requirements which you can learn more about below.
+
+<Info>
+  Glimpse will ignore dependabot pull requests and will not deploy them to your preview environments.
+</Info>
+
+## Configure
+
+You can configure existing repositories by clicking the `Configure` button for the repository you want to configure. These settings will be used to deploy each of your pull requests and apply to each site deployed with Glimpse.
+
+## Sites
+
+Glimpse lists all active sites on the Forge server your repository is connected to. You can see the name of the site, the repository, branch, status, SSL status and when the site was provisioned.
+
+To preview your pull request, click on the name of the site to open the site in a new tab.
+
+
+## Settings
+
+### Triggers
+
+Glimpse can deploy your pull requests when:
+
+- A pull request is opened (this does not include reopened PRs or drafts)
+- An existing PR gets labels with the `glimpse` label (this is not case sensistive and does not apply to drafts)
+- A draft PR is ready for review
+
+<Info>
+  Glimpse will ignore dependabot pull requests and will not deploy them to your preview environments.
+  If you want to deploy dependabot pull requests, you can disable the `Ignore Dependabot branches` checkbox.
+</Info>
+
+### Server Provider
+
+Glimpse currently supports [Forge](https://forge.laravel.com) servers. You can select the Forge server you want to deploy your pull requests to.
+
+As a general rule, you should have a wild card DNS record pointing to the IP address of your Forge server. You will see the selected server IP address below the Forge server dropdown.
+
+### Domains
+
+Glimpse allows you to customize the domain for your preview environments. You can select the scheme, site identifier, and base domain. Glimpse will use these
+settings to generate the URL for your site.
+
+Available site identifiers include:
+
+- `{branch}`: The name of the branch.
+- `{repo-pull-request-number}`: The name of the repository and the number of the pull request.
+- `{pull-request-number}`: The number of the pull request.
+
+Glimpse will make an attempt to verify the DNS record for your chosen base domain. Domains with Cloudflare nameservers may not be able to be verified due to Cloudflare domain proxying.
+
+For example, if you select the site identifier `{repo-pull-request-number}`, Glimpse will generate a site identifier for your site like `my-repo-123`.
+
+<Info>
+  Glimpse will automatically provision a Let's Encrypt SSL certificate for sites with HTTPS enabled.
+</Info>
+
+### Deploy script
+
+By default, Glimpse uses the same deploy script provided by Forge for Laravel applications. You can customize this when you connect your repository, or by updating your repository settings.
+
+<CodeGroup>
+
+```bash Default
+cd $FORGE_SITE_PATH
+git pull origin $FORGE_SITE_BRANCH
+
+$FORGE_COMPOSER install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+
+( flock -w 10 9 || exit 1
+    echo 'Restarting FPM...'; sudo -S service $FORGE_PHP_FPM reload ) 9>/tmp/fpmlock
+
+if [ -f artisan ]; then
+    $FORGE_PHP artisan migrate --force
+fi
+```
+
+<Tip>
+  You can learn more about the deploy script in the [Forge documentation](https://forge.laravel.com/docs/sites/deployments.html#deploy-script), including avaiable environment variables.
+</Tip>
+
+</CodeGroup>
+
+### Environment variables
+
+Due to the way Forge handles `.env` files, your `.env.example` file will be copied on the first deployment. Glimpse will either inject or replace the values in your `.env` file with the values from the environment variables you provide in the repository settings.
+
+You can learn more about how Forge manages environments in the [Forge documentation](https://forge.laravel.com/docs/sites/deployments.html#environments).
+
+<Info>
+  Glimpse securely stores your environment variables in the database using standard Laravel encryption.
+</Info>
+
+### Queue workers
+
+You can configure a default queue worker for your sites by providing a queue connection in your resposity settings. Glimpse will handle creating the worker in Forge using default settings.
+
+<Tip>
+  Be sure to restart your queue workers in your deploy script if you are using anything other than the sync connection.
+</Tip>
+
+### Horizon and Pulse
+
+Glimpse can automatically enable Horizon and Pulse daemons for your sites. To enable this, check the approprate checkbox in your repository settings.
+
+### Security rules
+
+If you wish to secure your sites with basic HTTP auth, you can provide a username and password in your repository settings. Glimpse will automatically create a security rule for your site.
+
+## Notifications
+
+Glimpse can notify you when your pull request is ready to be previewed. You can enable manage notifications by clicking the `Notifications` tab on the repository details page.
+
+<Frame>
+  <img src="/images/repository-notifications.png" style={{ borderRadius: '0.5rem' }} />
+</Frame>
+
+### Pull Requests
+
+By default, Glimpse will post a comment on your pull request when each deployment has started, and when it has completed. You can disable these notifications by unchecking the `Enable notifications` checkbox.
+
+### Email
+
+You can enable email notification by providing a comma separated list of email addresses. Glimpse will send an email to each of the addresses when a deployment has completed.
+
+
+### Slack
+
+Glimpse can send a notification to your Slack channel when a deployment has finished. To enable this, you need to provide a Slack webhook URL. Glimpse will send a message to the channel with the following format:
+
+<Frame>
+  <img src="/images/slack-notification.png" style={{ borderRadius: '0.5rem' }} />
+</Frame>
+
+<Tip>
+  To learn more about Slack webhooks, visit the [Slack documentation](https://api.slack.com/messaging/webhooks).
+</Tip>
+
+
+### Linear
+
+Glimpse can post a comment on the Linear issue associated with your pull request. To enable this, you need to connect your Linear account to Glimpse from your team settings page.
+
+To learn more about the Linear integration, read the [Linear integration](/integrations/linear) documentation.

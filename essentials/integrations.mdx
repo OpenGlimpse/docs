@@ -1,0 +1,52 @@
+---
+title: 'Integrations'
+description: 'Glimpse integrates with a variety of tools and services to enhance your development experience.'
+icon: 'plug'
+---
+
+Glimpse integrates with a variety of tools and services to enhance your development experience. These integrations allow you to seamlessly communicate deployment statuses with a variety of tools, such as GitHub, Slack, and more.
+
+## GitHub
+
+Glimpse integrates with GitHub's oauth authentication to allow users to connect their GitHub account to Glimpse.
+This integration allows users to authenticate with GitHub using their existing GitHub account, and then authorize Glimpse to access their GitHub repositories.
+
+### GitHub App
+
+Glimpse has an official GitHub app that must be installed to give Glimpse access to your GitHub repositories.
+
+<Info>
+  You can install the GitHub app from the [GitHub Marketplace](https://github.com/apps/glimpse-sh/installations/new).
+</Info>
+
+Once the GitHub app is installed, you will be able to connect and configure your repositories from the Glimpse dashboard.
+
+## Slack
+
+Glimpse integrates with Slack using webhooks to allow users to receive notifications in their Slack workspace.
+This integration enables Glimpse to send deployment status updates and other relevant information directly to your specified Slack channels.
+
+To set up the Slack integration, you'll need to create an incoming webhook for your Slack workspace.
+
+<Info>
+  You can learn how to create a Slack webhook in the [Slack API documentation](https://api.slack.com/messaging/webhooks).
+</Info>
+
+Once you've created a webhook, you can add it to your Glimpse repository settings. This will allow Glimpse to send notifications to your specified Slack channel whenever there's a relevant update or event.
+
+## Linear
+
+Glimpse integrates with Linear to allow users to connect their Linear account to Glimpse.
+This integration allows users to authenticate with Linear using their existing Linear account, and then authorize Glimpse to access their Linear workspace.
+
+Glimpse has an official Linear app that must be installed to give Glimpse access to your Linear workspace.
+
+<Info>
+  You can install the Linear app from the [Linear Marketplace](https://linear.app/marketplace/apps/glimpse-sh).
+</Info>
+
+Once the Linear app is installed, Glimpse will automatically post comments to the associate Linear issue with a link to your preview environments.
+
+<Tip>
+  To learn more about how Glimpse uses integrations to notify you of deployments, check out the [notifications](/essentials/repositories#notifications) section.
+</Tip>
